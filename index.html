@@ -166,24 +166,111 @@ var myObject = new myConstructor;
         <section>
         
             <section>
-                <h2>Enkelte sære ting</h2>
-                <p>Typekonvertering</p>
+                <h2>1. Sær typekonvertering</h2>
                 <div class="fragment">
 				<pre><code>
 '\n  123  \t' == 123    // true
 typeof NaN              // "number"
+                </pre></code>
+</div>
 
+<div class="fragment">
+<pre><code>
 var x = {}, y = {};
 x == y                  // false
 x >= y                  // true
 x <= y                  // true
+</pre></code>
+</div>
 
+<div class="fragment">
+<pre><code>
 {} + []                 // 0
 {} + {}                 // NaN
 [] + {}                 // "[object Object]"
+</pre></code>
+</div>
 
+            </section>
+            
+            <section>
+                <h2>Uvanlig håndtering av scope</h2>
+                <p><strong><em>Kun</em></strong> funksjonscope</p>
+                <div class="fragment">
+				<pre><code>
+function() {
+    if ( ... ) {
+        var foo = "bar";
+    }
+    // foo => "bar"
+}
+// foo => undefined
+                </pre></code>
+</div>
+            </section>
+            
+            <section>
+                <h2>2. Forvirrende "this"</h2>
+                <p>Globalt scope er fallback</p>
+                <div class="fragment">
+				<pre><code>
+funksjon()                 // this => 'globalt scope'
+mittObjekt.funksjon()      // this => mittObjekt
+funksjon.call(mittObjekt)  // this => mittObjekt
+                </pre></code>
+</div>
+<div class="fragment">
+
+				<pre><code>
+variabel = "foobar";
+                </pre></code>
+</div>
+            </section>
+            
+            <section>
+                <h2>3. Vanskelig å forstå arv</h2>
+				<pre><code>
+Varebil.prototype = new Bil;
                 </pre></code>
             </section>
+            
+             <section>
+                <h2>4. Mangel på abstraksjon</h2>
+                <p>jQuery</p>
+                <div class="fragment">
+<pre><code>
+    
+</pre></code>
+                </div>
+            </section>
+            
+            <section>
+                <h2>4. Mangel på abstraksjon</h2>
+                <p>Ikke språket sin feil</p>
+                <div class="fragment">
+<pre><code>
+    $("#foo").on("submit", function () {   
+        $.ajax({
+            url:"http://foo.no",
+            type:"get",
+            data:$("#foo [type=text]").val(),
+            error:function (error) {
+                $("#feilmeldingsboks").text(error);
+            },
+            success:function (data) {
+                $("#resultatTabell").empty();
+                JSON.parse(data).forEach(function (x) {
+                    var rad = "<tr><td>" + x.navn + "</td></tr>";
+                    $("#resultatTabell").append(rad);
+                });
+            }
+        });
+    });
+</pre></code>
+                </div>
+            </section>
+            
+           
             
             
         </section>
