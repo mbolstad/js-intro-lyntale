@@ -28,6 +28,12 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+        
+        <style>
+            .fade {
+                color: #aaa
+            }
+        </style>
 	</head>
 
 	<body>
@@ -56,7 +62,7 @@
             </h2><br>
             <ul>
                 <li>Intro</li>
-                <li>Feil og mangler i språket</li>
+                <li>Problemet med JavaScript</li>
                 <li>De bra tingene</li>
             </ul>
         </section>
@@ -159,14 +165,23 @@ var myObject = new myConstructor;
 
 		</section>
         
-        <section data-background="#cc1111">
-            <h2>Så hvorfor hater så mange<br> JavaScript?</h2>
+        <section>
+            <section data-background="#cc1111">
+                <h2>Så hva er problemet med<br> JavaScript?</h2>
+                <br><br><br><br>
+                <p class="fade"><em>- En rangering fra 5 til 0 &#8594;</em></p>
+            </section>
+            
+            <section>
+                <h2>Anbefalt lesing</h2>
+                <img src="goodparts.png"/>
+            </section>
         </section>
-        
+
         <section>
         
             <section>
-                <h2>1. Sær typekonvertering</h2>
+                <h2>5. Sær typekonvertering</h2>
                 <div class="fragment">
 				<pre><code>
 '\n  123  \t' == 123    // true
@@ -194,7 +209,7 @@ x <= y                  // true
             </section>
             
             <section>
-                <h2>Uvanlig håndtering av scope</h2>
+                <h2>4. Uvanlig håndtering av scope</h2>
                 <p><strong><em>Kun</em></strong> funksjonscope</p>
                 <div class="fragment">
 				<pre><code>
@@ -210,7 +225,7 @@ function() {
             </section>
             
             <section>
-                <h2>2. Forvirrende "this"</h2>
+                <h2>3. Forvirrende "this"</h2>
                 <p>Globalt scope er fallback</p>
                 <div class="fragment">
 				<pre><code>
@@ -228,28 +243,61 @@ variabel = "foobar";
             </section>
             
             <section>
-                <h2>3. Vanskelig å forstå arv</h2>
+                <h2>2. Vanskelig å forstå arv</h2>
 				<pre><code>
-Varebil.prototype = new Bil;
+Varebil.prototype = new Bil; // Varebil subklasser Bil
                 </pre></code>
             </section>
             
-             <section>
-                <h2>4. Mangel på abstraksjon</h2>
-                <p>jQuery</p>
+            <section>
+                <h2>1. Dårlig implementasjon i browsere</h2>
+				<br>
+                <div>
+                
+                <div class="fragment fade-out remove-after">
+                <img src="ie7.png"/>
+                </div>
+                
                 <div class="fragment">
+                <ul>
+                    <li>IE har imidlertid blitt mye bedre i senere versjoner.</li>
+                    <li>Feil og mangler i en browser kan rettes med <em>polyfill</em>-biblioteker.</li>
+                </ul>
+                
+                <div class="fragment">
+<p class="fade">Eksempel, få HTML5-støtte i &lt;IE9</p>
 <pre><code>
-    
+<!--[if lt IE 9]>
+     <script src="html5shiv.js"></script>
+<![endif]-->
 </pre></code>
+           
                 </div>
             </section>
-            
+
+        </section>
+        
+        <section>
             <section>
-                <h2>4. Mangel på abstraksjon</h2>
-                <p>Ikke språket sin feil</p>
-                <div class="fragment">
+                <h2>0. Mangel på abstraksjon</h2>
+                <div class="fragment fade-in">
+                
+                <div class="fragment fade-out remove-after">
+                    <ul>
+                        <li>jQuery har vært standardutrustning.
+                            <ul>
+                                <li class="fade">Kan utføre magi, men gir ikke struktur til koden.</li></ul>
+                        </li>
+                    </ul>
+                </div>
+
+                
+                </div>
+                <div class="fragment fade-in">
+                <p>Eksempel på typisk jQuery-kode</p>
+                <div>
 <pre><code>
-    $("#foo").on("submit", function () {   
+    $("form").on("submit", function () {   
         $.ajax({
             url:"http://foo.no",
             type:"get",
@@ -268,13 +316,92 @@ Varebil.prototype = new Bil;
     });
 </pre></code>
                 </div>
+                </div>
             </section>
             
-           
+            <section>
+                <h2>Kan fort føre til spaghettikode</h2>
+				<img src="spaghetti.jpg"/>
+            </section>
+        </section>
+        
+        <section data-background="#49aa44">
+            <h2>Hvordan få kontroll på <br>galskapen?</h2>
+        </section>
+        
+        <section>
+            <section>
+                <h2>Benytt god programmeringsskikk</h2>
+                
+                <div class="fragment fade-out remove-after">
+                    <ul>
+                        <li>Gi like mye kjærlighet til frontend som til backend.</li>
+                        <li>Designprinsipper som <em>Separation of concern</em> og <em>Single responsibility principle</em> gjelder også frontend.</li>                    
+                    </ul>
+                </div>
+                <div class="fragment fade-in">
+<pre><code>
+var SearchFormView = Backbone.View.extend({
+
+    initialize: function() {
+        this.model = new SearchModel();
+        this.model.on("sync", this.render);
+        this.model.on("error", this.renderErrorMessage);
+    },
+    
+    events: {
+        "form submit": "performSearch"
+    },
+    
+    performSearch: function() {
+        this.model.fetch();
+    }
+});
+</pre></code>
+                </div>
+                
+            </section>
             
+            <section>
+                <h2>Benytt kjente designpatterns</h2>
+                <ul>
+                    <li>Inndeling i f. eks. <em>Model-View-Controller (MVC)</em>.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>MV*-rammeverk i JS</h2>
+                <img src="trends.png"/>
+                <p class="fade"><em>Kilde: Google Trends</em></p>
+            </section>
+            
+            <section>
+                <h2>Finn riktig MV*-rammeverk</h2>
+                <img src="todomvc.png"/>
+                <br><br>
+                <p>Samme applikasjon utviklet i 45 varianter.</p>
+            </section>
+            
+            <section>
+                <h2>Bruk de rette biblioteker</h2>
+                <ul>
+                    <li>JavaScript er full av feil, men finnes veldig mange biblioteker til språket.</li>
+                    <li>Kan fort skape flere problemer enn de løser, må velges med omhu.</li>
+                </ul>
+            </section>
             
         </section>
-
+        
+        <section>
+            <h2>
+                Oppsummert
+            </h2>
+            
+            <ul>
+                <li>Anerkjenn at JS har sine mangler, men ikke gå "all-inn" med rammeverk.</li>
+            </ul>
+        </section>
+        
         <section>
             <br><br>
             <h2>
@@ -320,6 +447,25 @@ Varebil.prototype = new Bil;
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
+            
+            (function() {
+                var oldDisplay;
+                
+                Reveal.addEventListener( 'fragmentshown', function( event ) {
+                    if (event.fragment.className.match("remove-after")) {
+                        oldDisplay = event.fragment.style.display;
+                        event.fragment.style.display = "none";
+                    }
+                } );
+                
+                Reveal.addEventListener( 'fragmenthidden', function( event ) {
+                    if (event.fragment.className.match("remove-after")) {
+                        event.fragment.style.display = oldDisplay;
+                    }
+                } );
+            })();
+            
+            
 
 		</script>
 
