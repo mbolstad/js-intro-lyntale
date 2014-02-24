@@ -333,13 +333,24 @@ Varebil.prototype = new Bil; // Varebil subklasser Bil
             <section>
                 <h2>Benytt god programmeringsskikk</h2>
                 
-                <div class="fragment fade-out remove-after">
+                <div><!-- class="fragment fade-out remove-after"> -->
                     <ul>
                         <li>Gi like mye kjærlighet til frontend som til backend.</li>
                         <li>Designprinsipper som <em>Separation of concern</em> og <em>Single responsibility principle</em> gjelder også frontend.</li>                    
                     </ul>
                 </div>
-                <div class="fragment fade-in">
+                
+            </section>
+            
+            <section>
+                <h2>Benytt kjente designpatterns</h2>
+                <ul>
+                    <li>Inndeling i f. eks. <em>Model-View-Controller (MVC)</em>.</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>MVC i Backbone</h2>
 <pre><code>
 var SearchFormView = Backbone.View.extend({
 
@@ -358,16 +369,7 @@ var SearchFormView = Backbone.View.extend({
     }
 });
 </pre></code>
-                </div>
-                
-            </section>
-            
-            <section>
-                <h2>Benytt kjente designpatterns</h2>
-                <ul>
-                    <li>Inndeling i f. eks. <em>Model-View-Controller (MVC)</em>.</li>
-                </ul>
-            </section>
+</section>
             
             <section>
                 <h2>MV*-rammeverk i JS</h2>
@@ -398,7 +400,8 @@ var SearchFormView = Backbone.View.extend({
             </h2>
             
             <ul>
-                <li>Anerkjenn at JS har sine mangler, men ikke gå "all-inn" med rammeverk.</li>
+                <li>De fleste av JavaScripts merkeligheter kommer man seg lett utenom. Ikke prøv å kode Java i JavaScript.</li>
+                <li>Ikke gå "all-inn" med rammeverk.</li>
             </ul>
         </section>
         
